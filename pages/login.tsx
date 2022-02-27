@@ -2,22 +2,18 @@ import React, { useState } from 'react'
 import Router from 'next/router'
 import Layout from 'components/Layout'
 
-const apiUrl = process.env.NEXT_PUBLIC_DB_BASE_URL
-
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-
-    const url = new URL('/api/user', apiUrl)
     try {
       const body = {
         email,
         password,
       }
-      await fetch(url.href, {
+      await fetch(`/api/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
