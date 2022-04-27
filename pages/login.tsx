@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
+import { useSession, signIn, signOut } from "next-auth/react"
 import Layout from 'components/Layout'
 
 const SignUp: React.FC = () => {
@@ -21,6 +22,24 @@ const SignUp: React.FC = () => {
     } catch (error) {
       console.error(error)
     }
+  }
+  function Component() {
+  const { data: session } = useSession()
+    if (session) {
+      return (
+        <>
+          <pre>{JSON.stringify(session, null, 2 )}</pre> <br />
+          <button onClick={() => signOut()}>Sign out</button>
+        </>
+      )
+    }
+    return (
+      <>
+        Not signed in <br />
+        <button onClick={() => signIn()}>Sign in</button>
+      </>
+    )
+  
   }
 
   const enableSubmit = email !== '' && password !== ''

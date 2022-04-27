@@ -10,6 +10,7 @@ const SignUp: React.FC = () => {
   const [insuranceNumber, setInsuranceNumber] = useState('')
   const [insurance, setInsurance] = useState('')
   const [gender, setGender] = useState('')
+  const [yubikey, setYubikey] = useState('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -22,6 +23,7 @@ const SignUp: React.FC = () => {
         insuranceNumber: +insuranceNumber,
         insuranceId: +insurance,
         genderId: +gender,
+        yubikey
       }
       await fetch(`/api/user`, {
         method: 'POST',
@@ -117,6 +119,13 @@ const SignUp: React.FC = () => {
             type="text"
             required
             value={insuranceNumber}
+          />
+          <input
+            onChange={(e) => setYubikey(e.target.value)}
+            placeholder="Insert Yubikey"
+            type="text"
+            required
+            value={email}
           />
           <input disabled={!enableSubmit} type="submit" value="Signup" />
           <a className="back" href="#" onClick={() => Router.push('/')}>
